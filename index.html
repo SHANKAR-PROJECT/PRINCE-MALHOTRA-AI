@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT AI System</title>
+    <title>Price Malhotra AI Chat Bot</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header Section -->
-    <header>
-        <h1>ChatGPT AI Chat System</h1>
+    <header class="header">
+        <h1>PRICE MALHOTRA AI CHAT BOT</h1>
     </header>
-
+    
     <!-- Chat Container -->
-    <div class="chat-container" id="chatContainer">
-        <!-- Example AI Message -->
+    <div class="chat-container">
         <div class="ai-chat-box">
-            <img src="ai.png" alt="AI" id="aiImage" width="40px">
+            <img src="ai.png" alt="" id="aiImage" width="50">
             <div class="ai-chat-area">
-                Hello! How can I assist you today?
+                Hello! How Can I Help You Today?
             </div>
         </div>
     </div>
-
+    
     <!-- Prompt Area -->
     <div class="prompt-area">
-        <input type="text" id="userInput" placeholder="Type your message...">
-        <button id="submitBtn">
-            <img src="submit.svg" alt="Submit" class="load">
+        <input type="text" id="prompt" placeholder="Message...">
+        <button id="image">
+            <img src="img.svg" alt="">
+            <input type="file" accept="images/*" hidden>
+        </button>
+        <button id="submit">
+            <img src="submit.svg" alt="">
         </button>
     </div>
 
