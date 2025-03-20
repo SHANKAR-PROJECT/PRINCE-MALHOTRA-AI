@@ -1,9 +1,6 @@
 let prompt = document.querySelector("#prompt");
 let submitbtn = document.querySelector("#submit");
 let chatContainer = document.querySelector(".chat-container");
-let imagebtn = document.querySelector("#image");
-let image = document.querySelector("#image img");
-let imageinput = document.querySelector("#image input");
 
 const Api_Url = "https://shankar-gpt-3-api.vercel.app/api?message=";
 
@@ -18,18 +15,19 @@ async function generateResponse(aiChatBox) {
         let response = await fetch(Api_Url + encodeURIComponent(user.message));
         let data = await response.json();
         
-        let apiResponse = data.response || "कोई जवाब नहीं मिला!";
-        text.innerHTML = apiResponse;
+        // Fix: API के सही response format को हैंडल कर रहे हैं
+        if (data.status && data.response) {
+            text.innerHTML = data.response; 
+        } else {
+            text.innerHTML = "⚠️ एरर: API से सही जवाब नहीं आया!";
+        }
     } 
     catch (error) {
         console.log(error);
-        text.innerHTML = "⚠️ एरर आ गया! कृपया फिर से कोशिश करें।";
+        text.innerHTML = "⚠️ एरर: कुछ गड़बड़ हो गई, बाद में कोशिश करें!";
     } 
     finally {
         chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: "smooth" });
-        image.src = `img.svg`;
-        image.classList.remove("choose");
-        user.file = {};
     }
 }
 
@@ -44,9 +42,7 @@ function handlechatResponse(userMessage) {
     user.message = userMessage;
 
     let html = `<img src="user.png" alt="" id="userImage" width="8%">
-    <div class="user-chat-area">
-    ${user.message}
-    </div>`;
+    <div class="user-chat-area">${user.message}</div>`;
 
     prompt.value = "";
     let userChatBox = createChatBox(html, "user-chat-box");
